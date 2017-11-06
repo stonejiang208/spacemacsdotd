@@ -376,6 +376,9 @@ before packages are loaded."
   (setq ycmd-force-semantic-completion t)
   (setq ycmd-extra-conf-whitelist '("/opt/dev/DRE/x.4.5/ACE_wrappers/*"))
   (add-hook 'c++-mode-hook 'ycmd-mode)
+  (setq c-default-style "ellemtel")
+  (setq c-basic-offset 2)
+  (c-set-offset 'substatement-open 0)
 
   ;; 解决org表格里面中英文对齐的问题
   (when (configuration-layer/layer-usedp 'chinese)

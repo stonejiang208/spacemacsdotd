@@ -76,9 +76,13 @@ Each entry is either:
         '("~/.spacemacs.d/templates/"))
   )
 
-(defun stone/post-init-cc-mode ()
+(defun stone/post-init-company-c-headers()
   (progn
-    (setq c-default-style "ellemtel")
-    (setq c-basic-offset 2)
-    )
+    (setq company-c-headers-path-system
+          (quote
+           ("/usr/include/" "/usr/local/include/" "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1")))
+    (setq company-c-headers-path-user
+          (quote
+           ("/Users/guanghui/cocos2d-x/cocos/platform" "/Users/guanghui/cocos2d-x/cocos" "." "/Users/guanghui/cocos2d-x/cocos/audio/include/"))))
+  
   )
