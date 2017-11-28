@@ -29,7 +29,10 @@ This function should only modify configuration layer settings."
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(
+   '(lua
+     html
+     javascript
+     perl5
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
@@ -72,6 +75,8 @@ This function should only modify configuration layer settings."
                       syntax-checking-enable-tooltips nil)
 
      semantic
+     themes-megapack
+     yaml
      ycmd
      ;; version-control
      stone
@@ -146,7 +151,7 @@ It should only modify the values of Spacemacs settings."
    ;; `recents' `bookmarks' `projects' `agenda' `todos'.
    ;; List sizes may be nil, in which case
    ;; `spacemacs-buffer-startup-lists-length' takes effect.
-   dotspacemacs-startup-lists '((recents . 5)
+   dotspacemacs-startup-lists '((recents . 10)
                                 (projects . 7))
    ;; True if the home buffer should respond to resize events. (default t)
    dotspacemacs-startup-buffer-responsive t
@@ -381,7 +386,7 @@ before packages are loaded."
   (setq ycmd-global-config "/Users/jiangtao/.ycm_extra_conf.py")
   (setq ycmd-force-semantic-completion t)
   (setq ycmd-extra-conf-whitelist '("/opt/dev/DRE/x.4.5/ACE_wrappers/*"))
-  (add-hook 'c++-mode-hook 'ycmd-mode)
+  ;; (add-hook 'c++-mode-hook 'ycmd-mode)
   (setq c-default-style "ellemtel")
   (setq c-basic-offset 2)
   (c-set-offset 'substatement-open 0)
@@ -392,7 +397,8 @@ before packages are loaded."
       (spacemacs//set-monospaced-font
        "Source Code Pro" "Hiragino Sans GB" 14 16))
     )
-
+  (setq linum-relative-global-mode nil)
+  
   )
 (setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
 (load custom-file 'no-error 'no-message)
