@@ -29,27 +29,20 @@ This function should only modify configuration layer settings."
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(lua
-     html
-     javascript
-     perl5
-     ;; ----------------------------------------------------------------
-     ;; Example of useful layers you may want to use right away.
-     ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
-     ;; `M-m f e R' (Emacs style) to install them.
-     ;; ----------------------------------------------------------------
-     (auto-completion :variables auto-completion-enable-sort-by-usage t
-                      auto-completion-enable-snippets-in-popup t
-                      :disabled-for org markdown)
-
+   '(
+     ivy
      better-defaults
+     ranger
      colors
-     (c-c++ :variables
-            c-c++-default-mode-for-headers 'c++-mode)
-     chinese
-     deft
-     docker
-     emacs-lisp
+     prodigy
+     search-engine
+     graphviz
+     (syntax-checking :variables syntax-checking-enable-by-default nil
+                      syntax-checking-enable-tooltips nil)
+     (spell-checking :variables spell-checking-enable-by-default nil)
+     (vinegar :variables vinegar-reuse-dired-buffer t)
+     (spacemacs-layouts :variables layouts-enable-autosave nil
+                        layouts-autosave-delay 300)
      (git :variables
           git-magit-status-fullscreen t
           magit-push-always-verify nil
@@ -57,28 +50,37 @@ This function should only modify configuration layer settings."
           magit-revert-buffers 'silent
           magit-refs-show-commit-count 'all
           magit-revision-show-gravatars nil)
-     gtags
-     helm
-     ivy
-     markdown
-     neotree
-     (shell :variables
-             shell-default-height 30
-             shell-default-position 'bottom)
-     ;; spell-checking
-     (org :variables org-want-todo-bindings t)
+     (ibuffer :variables ibuffer-group-buffers-by 'projects)
+     (auto-completion :variables auto-completion-enable-sort-by-usage t
+                      auto-completion-enable-snippets-in-popup t
+                      :disabled-for org markdown)
      (osx :variables osx-dictionary-dictionary-choice "Simplified Chinese - English"
           osx-command-as 'super)
-     protobuf
-     python
-     (syntax-checking :variables syntax-checking-enable-by-default nil
-                      syntax-checking-enable-tooltips nil)
-
-     semantic
-     themes-megapack
+     restclient
+     (gtags :disabled-for clojure emacs-lisp javascript latex python shell-scripts)
+     (shell :variables shell-default-shell 'eshell)
+     ;; docker
+     latex
+     deft
+     markdown
+     (org :variables org-want-todo-bindings t)
      yaml
-     ycmd
-     ;; version-control
+     react
+     (python :variables
+             python-test-runner '(nose pytest))
+     ;; (ruby :variables ruby-version-manager 'chruby)
+     ;; ruby-on-rails
+     lua
+     html
+     javascript
+     (typescript :variables
+                typescript-fmt-on-save nil
+                typescript-fmt-tool 'typescript-formatter)
+     emacs-lisp
+     (clojure :variables clojure-enable-fancify-symbols t)
+     racket
+     (c-c++ :variables
+            c-c++-default-mode-for-headers 'c++-mode)
      stone
      )
    ;; List of additional packages that will be installed without being
@@ -160,8 +162,8 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(spacemacs-dark
-                         spacemacs-light)
+   dotspacemacs-themes '(solarized-light
+                         solarized-dark)
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
    ;; (default t)
    dotspacemacs-colorize-cursor-according-to-state t
@@ -372,7 +374,23 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
+  (setq configuration-layer--elpa-archives
+        '(("melpa-cn" . "https://elpa.emacs-china.org/melpa/")
+          ("org-cn"   . "https://elpa.emacs-china.org/org/")
+          ("gnu-cn"   . "https://elpa.emacs-china.org/gnu/")))
 
+  ;; https://github.com/syl20bnr/spacemacs/issues/2705
+  ;; (setq tramp-mode nil)
+  (setq tramp-ssh-controlmaster-options
+        "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
+
+  ;; ss proxy. But it will cause anacond-mode failed.
+  (setq socks-server '("Default server" "127.0.0.1" 1080 5))
+  (setq evil-shift-round nil)
+  (setq byte-compile-warnings '(not obsolete))
+  (setq warning-minimum-level :error)
+  ;; hack for remove purpose mode
+  (setq purpose-mode nil)
  )
 
 (defun dotspacemacs/user-config ()
@@ -397,13 +415,12 @@ before packages are loaded."
       (spacemacs//set-monospaced-font
        "Source Code Pro" "Hiragino Sans GB" 14 16))
     )
-  (setq linum-relative-global-mode nil)
-  
+  (setq split-width-threshold 120)
+  (linum-relative-on)
+
   )
 (setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
 (load custom-file 'no-error 'no-message)
-
-
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
 (defun dotspacemacs/emacs-custom-settings ()
@@ -411,5 +428,4 @@ before packages are loaded."
 This is an auto-generated function, do not modify its content directly, use
 Emacs customize menu instead.
 This function is called at the very end of Spacemacs initialization."
-
 )
