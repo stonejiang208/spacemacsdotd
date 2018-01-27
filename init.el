@@ -41,6 +41,7 @@ values."
      ;; better-defaults
      emacs-lisp
      git
+     (ibuffer :variables ibuffer-group-buffers-by 'projects)
      gtags
      ;; markdown
      org
