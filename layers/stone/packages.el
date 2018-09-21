@@ -80,9 +80,21 @@ Each entry is either:
   (progn
     (setq company-c-headers-path-system
           (quote
-           ("/usr/include/" "/usr/local/include/" "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1")))
+           (
+            "/usr/include/"
+            "/usr/local/include/"
+            "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"
+            )))
     (setq company-c-headers-path-user
           (quote
-           ("/Users/guanghui/cocos2d-x/cocos/platform" "/Users/guanghui/cocos2d-x/cocos" "." "/Users/guanghui/cocos2d-x/cocos/audio/include/"))))
-  
+           (
+            "/opt/dre/ACE_wrappers"
+            "/opt/dre/ACE_wrappers/TAO"
+            "/opt/dre/ACE_wrappers/TAO/orbsvcs"
+            "."
+            ))))
+  )
+
+(defun stone/hello-jiangtao()
+  (message "hello jiantao")
   )

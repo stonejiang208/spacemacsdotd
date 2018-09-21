@@ -30,22 +30,31 @@ values."
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(
+   '(php
+     ruby
+     octave
+     typescript
+     python
+     yaml
+     csv
+     markdown
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     helm
-     ;; auto-completion
-     ;; better-defaults
+     deft
+     ivy
      emacs-lisp
      git
      (ibuffer :variables ibuffer-group-buffers-by 'projects)
      gtags
-     ;; markdown
+     markdown
+     protobuf
      org
-     chinese
+     (chinese :packages youdao-dictionary fcitx
+              :variables chinese-enable-fcitx nil
+              chinese-enable-youdao-dict t)
      better-defaults
      colors
      (auto-completion :variables auto-completion-enable-sort-by-usage t
@@ -55,13 +64,20 @@ values."
           osx-command-as 'super)
      (c-c++ :variables
             c-c++-default-mode-for-headers 'c++-mode)
+     lua
+     html
+     javascript
+     (shell :variables shell-default-shell 'eshell)
+     docker
+
+     stone
 
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
      ;; spell-checking
      ;; syntax-checking
-     ;; version-control
+     version-control
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -272,7 +288,8 @@ values."
    ;;                       text-mode
    ;;   :size-limit-kb 1000)
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   ;;dotspacemacs-line-numbers 'relative
+   dotspacemacs-line-numbers t
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
    dotspacemacs-folding-method 'evil
@@ -313,7 +330,7 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
-(setq configuration-layer--elpa-archives
+(setq configuration-layer-elpa-archives
       ' (("melpa-cn" . "https://elpa.emacs-china.org/melpa/")
          ("org-cn"   . "https://elpa.emacs-china.org/org/")
          ("gnu-cn"   . "https://elpa.emacs-china.org/gnu/")))
@@ -334,6 +351,13 @@ you should place your code here."
 (setq c-default-style "ellemtel")
 (setq c-basic-offset 2)
 (c-set-offset 'substatement-open 0)
+(eval-after-load "cc-mode"
+  '(define-key c-mode-base-map ";" nil))
+
+(setq deft-extensions '("org" "md" "txt"))
+(setq deft-directory "~/org-notes")
+
+(setq org-agenda-files '("~/org-gtd"))
 
 (setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
 (load custom-file 'no-error 'no-message)
