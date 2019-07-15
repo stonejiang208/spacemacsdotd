@@ -32,15 +32,12 @@ values."
    dotspacemacs-configuration-layers
    '(
      ivy
-     better-defaults
+;;     better-defaults
     ;; ranger
     ;; colors
     ;; prodigy
     ;; search-engine
     ;; graphviz
-     (syntax-checking :variables syntax-checking-enable-by-default nil
-                      syntax-checking-enable-tooltips nil)
-     (spell-checking :variables spell-checking-enable-by-default nil)
     ;; (vinegar :variables vinegar-reuse-dired-buffer t)
      (spacemacs-layouts :variables layouts-enable-autosave nil
                         layouts-autosave-delay 300)
@@ -67,20 +64,20 @@ values."
      markdown
      (org :variables org-want-todo-bindings t)
     ;; gpu
-     yaml
+    ;; yaml
     ;; react
      (python :variables
              python-test-runner '(nose pytest))
      ;; (ruby :variables ruby-version-manager 'chruby)
      ;; ruby-on-rails
-     lua
+  ;;   lua
      html
      javascript
      (typescript :variables
                 typescript-fmt-on-save nil
                 typescript-fmt-tool 'typescript-formatter)
      emacs-lisp
-     (clojure :variables clojure-enable-fancify-symbols t)
+    ;; (clojure :variables clojure-enable-fancify-symbols t)
      ;;racket
      (c-c++ :variables
             c-c++-default-mode-for-headers 'c++-mode)
@@ -94,7 +91,7 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(sicp)
+   ;;dotspacemacs-additional-packages '(sicp)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    dotspacemacs-excluded-packages
@@ -308,7 +305,7 @@ values."
    dotspacemacs-line-numbers nil
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
-   dotspacemacs-folding-method 'origami
+   dotspacemacs-folding-method 'evil
    ;; If non-nil smartparens-strict-mode will be enabled in programming modes.
    ;; (default nil)
    dotspacemacs-smartparens-strict-mode nil
