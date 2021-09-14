@@ -30,6 +30,7 @@ This function should only modify configuration layer settings."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     ;;javascript
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
@@ -42,7 +43,7 @@ This function should only modify configuration layer settings."
      better-defaults
      lua
      html
-     javascript
+     ;;javascript
      ;;perl5
      colors
      (c-c++ :variables
@@ -70,6 +71,7 @@ This function should only modify configuration layer settings."
                       syntax-checking-enable-tooltips nil)
 
      semantic
+     latex
      ;;themes-megapack
      yaml
      ;;ycmd
